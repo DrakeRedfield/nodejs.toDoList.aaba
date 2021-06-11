@@ -7,6 +7,8 @@ const pause = async () => {
         name: 'enter',
         message: `\nPress ${"ENTER".blue} to continue.\n`
     }
+    const { enter } = await inquirer.prompt( question );
+    return enter;
 }
 
 const readConsole = async ( message ) => {
@@ -16,7 +18,7 @@ const readConsole = async ( message ) => {
             name: 'desc',
             message,
             validate( value ){
-                if( this.validate.length === 0 ){
+                if( value.length === 0 ){
                     return 'Por favor, ingrese un valor.';
                 }
                 return true;

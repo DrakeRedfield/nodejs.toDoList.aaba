@@ -5,12 +5,12 @@ require('colors');
 const menuOption = (tasks) => {
     return {
         '1': async () => {
-            const text = await readConsole();
+            const text = await readConsole( 'Descripción' );
             tasks.newTask(text);
             return true; 
         },
         '2': async () => {
-            console.log('Opcion 2');
+            console.log(tasks.getAllTask);
             return true;
         },
         '3': async () => {
