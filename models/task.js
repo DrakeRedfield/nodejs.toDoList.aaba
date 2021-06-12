@@ -5,10 +5,14 @@ class Task {
     desc = '';
     completedAt = null;
 
-    constructor( desc ){
-        this.id = uuidv4();
+    constructor( desc, id = '', completedAt = null ){
+        if( id !== ''){
+            this.id = id;
+        }else{
+            this.id = uuidv4();
+        }
         this.desc = desc;
-        this.completedAt = null;
+        this.completedAt = completedAt;
     }
 
 };

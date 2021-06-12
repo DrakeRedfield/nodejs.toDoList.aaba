@@ -10,7 +10,7 @@ const getDataDB = () => {
         return null;
     }
     const info = fs.readFileSync(root,{encoding:'utf-8'});
-    console.log(info);
+    // console.log(info);
     return info;
 }
 

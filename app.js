@@ -13,13 +13,16 @@ const main = async () => {
     const tasks = new Tasks();
     //Get Options Menu
     const options = menuOption(tasks);
-    
+    //Load Data from .json
     const existData = getDataDB();
+
     if( existData ){
         const data = JSON.parse(existData);
+        tasks.loadData( data );
     }
 
-    await pause();
+    // console.log(tasks._listado);
+    // await pause();
 
     do {
         //Print Menu

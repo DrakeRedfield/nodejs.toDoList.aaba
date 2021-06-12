@@ -49,7 +49,7 @@ const menuOptions = [
             },
             {
                 value: '4',
-                name:`${'4.-'.green} To do`
+                name:`${'4.-'.green} Task pending`
             },
             {
                 value: '5',
@@ -76,8 +76,68 @@ const inquirerMenu = async () => {
     return opt;
 }
 
+const listTaskToDelete = async ( tasks = [] ) => {
+    const choices = tasks.map( (task,i) => {
+        const idx = `${i+1}.`.green;
+        return {
+            value: task.id,
+            name: `${idx} ${ task.desc }`
+        }
+    });
+    choices.unshift({
+        value: '0',
+        name: '0. '.green + 'Cancelar'
+    })
+    const questions = [
+        {
+            type: 'list',
+            name: 'id',
+            message: 'Borrar',
+            choices
+        }
+    ]
+    const { id } = await inquirer.prompt(questions);
+    return id;
+}
+
+const confirm = async (message) => {
+    const question = [
+        {
+            type: 'confirm',
+            name: 'ok',
+            message
+        }
+    ]
+    const { ok } = await inquirer.prompt(question);
+    return ok;
+}
+
+const listTaskToCheck = async ( tasks = [] ) => {
+    const choices = tasks.map( (task,i) => {
+        const idx = `${i+1}.`.green;
+        return {
+            value: task.id,
+            name: `${idx} ${ task.desc }`,
+            checked: (task.completedAt? true:false)
+        }
+    });
+    const questions = [
+        {
+            type: 'checkbox',
+            name: 'ids',
+            message: 'Selecciones',
+            choices
+        }
+    ];
+    const { ids } = await inquirer.prompt(questions);
+    return ids;
+}
+
 module.exports = {
     inquirerMenu,
     pause,
     readConsole,
+    listTaskToDelete,
+    listTaskToCheck,
+    confirm,
 }
